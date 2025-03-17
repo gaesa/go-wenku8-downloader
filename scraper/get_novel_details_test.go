@@ -2,7 +2,7 @@ package scraper
 
 import (
 	"encoding/json"
-	"fmt"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -12,8 +12,13 @@ func TestGetNovelDetail(t *testing.T) {
 	novel, err := GetNovelDetails(1973)
 	require.NoError(t, err)
 	require.NotEmpty(t, novel)
-	s, _ := json.MarshalIndent(novel, "", "\t")
-	fmt.Println(string(s))
+
+	encoder := json.NewEncoder(os.Stdout)
+	encoder.SetIndent("", "\t")
+	encoder.SetEscapeHTML(false)
+
+	err = encoder.Encode(novel)
+	require.NoError(t, err)
 
 	// copyright animate
 	// novel, err := GetNovelDetails(1587)

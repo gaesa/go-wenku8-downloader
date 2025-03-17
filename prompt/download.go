@@ -86,11 +86,11 @@ func createEpub(novel *scraper.Novel, volumeName string, chapterCount int, cover
 	formatedNovelName := formatFilename(novel.NovelName + "231231")
 	var imagePathList []string
 	// output epub path
-	var epubFilePath string = path.Join(downloadPath, fmt.Sprintf("%s %s.epub", formatedNovelName, formatedVolumeName))
+	epubFilePath := path.Join(downloadPath, fmt.Sprintf("%s %s.epub", formatedNovelName, formatedVolumeName))
 	// volume path
-	var volumePath string = path.Join(downloadPath, formatedVolumeName)
-	var imagePath string = path.Join(volumePath, downloader.ImageFolderName)
-	var coverPath string = path.Join(downloadPath, util.GetUrlLastString(novel.Cover))
+	volumePath := path.Join(downloadPath, formatedVolumeName)
+	imagePath := path.Join(volumePath, downloader.ImageFolderName)
+	coverPath := path.Join(downloadPath, util.GetUrlLastString(novel.Cover))
 
 	// create epub
 	epub, err := epub.NewEpub(novel.NovelName + " " + volumeName)
@@ -115,16 +115,11 @@ func createEpub(novel *scraper.Novel, volumeName string, chapterCount int, cover
 			return err
 		}
 		chapter := &scraper.Chapter{}
-		err = json.Unmarshal([]byte(file), &chapter)
+		err = json.Unmarshal(file, &chapter)
 		if err != nil {
 			return err
 		}
-		jsonByte, err := json.MarshalIndent(chapter.Content.Article, "", " ")
-		jsonStr := strings.Replace(string(jsonByte), "\"", "", -1)
-		if err != nil {
-			return err
-		}
-		xhtml := util.CreateSectionXhtml(chapter.Title, jsonStr)
+		xhtml := util.CreateSectionXhtml(chapter.Title, chapter.Content.Article)
 		if len(chapter.Content.Images) != 0 {
 			for _, img := range chapter.Content.Images {
 				imgFile := path.Join(imagePath, util.GetUrlLastString(img))
@@ -141,11 +136,11 @@ func createEpub(novel *scraper.Novel, volumeName string, chapterCount int, cover
 			return err
 		}
 	}
-	tempConverPath := imagePathList[0]
+	tempCoverPath := imagePathList[0]
 	if coverIndex < len(imagePathList) {
-		tempConverPath = imagePathList[coverIndex]
+		tempCoverPath = imagePathList[coverIndex]
 	}
-	internalCoverPath, _ := util.AddCover(epub, tempConverPath)
+	internalCoverPath, _ := util.AddCover(epub, tempCoverPath)
 	epub.SetCover(internalCoverPath, "")
 
 	err = epub.Write(epubFilePath)

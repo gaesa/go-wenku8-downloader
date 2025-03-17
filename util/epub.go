@@ -9,7 +9,7 @@ import (
 )
 
 func AddSection(epub *epub.Epub, title string, article string) error {
-	body := strings.ReplaceAll(article, "\\n", "<br/>")
+	body := strings.ReplaceAll(article, "\n", "<br/>")
 	xhtml := fmt.Sprintf(`<h1>%v</h1>%v`, title, body)
 	_, err := epub.AddSection(xhtml, title, "", "")
 	if err != nil {
@@ -19,7 +19,7 @@ func AddSection(epub *epub.Epub, title string, article string) error {
 }
 
 func CreateSectionXhtml(title string, article string) string {
-	body := strings.ReplaceAll(article, "\\n", "<br/>")
+	body := strings.ReplaceAll(article, "\n", "<br/>")
 	xhtml := fmt.Sprintf(`<h1>%v</h1>%v`, title, body)
 	return xhtml
 }

@@ -23,13 +23,17 @@ func DownloadChapter(chapter *scraper.Chapter, dirPath string) error {
 		chapter.Content.Article = ""
 	}
 
-	chapterJson, err := json.MarshalIndent(chapter, "", " ")
+	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
 	if err != nil {
 		return err
 	}
+	defer file.Close()
 
-	err = os.WriteFile(filePath, chapterJson, 0644)
-	if err != nil {
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", " ")
+	encoder.SetEscapeHTML(false)
+
+	if err := encoder.Encode(chapter); err != nil {
 		return err
 	}
 

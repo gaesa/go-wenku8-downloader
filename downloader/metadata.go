@@ -16,13 +16,17 @@ func DownloadNovelMetadata(novel *scraper.Novel, dirPath string) error {
 		return err
 	}
 
-	novelJson, err := json.MarshalIndent(novel, "", " ")
+	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
 	if err != nil {
 		return err
 	}
+	defer file.Close()
 
-	err = os.WriteFile(filePath, novelJson, 0644)
-	if err != nil {
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", " ")
+	encoder.SetEscapeHTML(false)
+
+	if err := encoder.Encode(novel); err != nil {
 		return err
 	}
 
@@ -36,13 +40,17 @@ func DownloadVolumeMetadata(volume *scraper.Volume, dirPath string) error {
 		return err
 	}
 
-	novelJson, err := json.MarshalIndent(volume, "", " ")
+	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
 	if err != nil {
 		return err
 	}
+	defer file.Close()
 
-	err = os.WriteFile(filePath, novelJson, 0644)
-	if err != nil {
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", " ")
+	encoder.SetEscapeHTML(false)
+
+	if err := encoder.Encode(volume); err != nil {
 		return err
 	}
 
