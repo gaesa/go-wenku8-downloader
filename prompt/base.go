@@ -70,7 +70,7 @@ func questionTwo(question Questions) {
 		}
 
 	case DoNothing:
-		os.Exit(1)
+		os.Exit(0)
 	default:
 		fmt.Println()
 	}
