@@ -3,7 +3,6 @@ package util
 import (
 	"bytes"
 	"io"
-	"io/ioutil"
 	"regexp"
 	"strings"
 
@@ -46,5 +45,5 @@ func GbkToUtf8(s []byte) ([]byte, error) {
 
 func Utf8ToGbk(s string) ([]byte, error) {
 	reader := transform.NewReader(strings.NewReader(s), simplifiedchinese.GBK.NewEncoder())
-	return ioutil.ReadAll(reader)
+	return io.ReadAll(reader)
 }
