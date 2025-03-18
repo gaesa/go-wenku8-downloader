@@ -1,6 +1,7 @@
 module github.com/gaesa/go-wenku-downloader
 
-go 1.20
+go 1.23.0
+
 toolchain go1.24.1
 
 require (
