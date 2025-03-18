@@ -1,4 +1,4 @@
-module github.com/samsonmxvi/go-wenku-downloader
+module github.com/gaesa/go-wenku-downloader
 
 go 1.20
 

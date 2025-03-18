@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/samsonmxvi/go-wenku-downloader/scraper/enums"
+	"github.com/gaesa/go-wenku-downloader/scraper/enums"
 )
 
 type Questions int

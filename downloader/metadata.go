@@ -5,8 +5,8 @@ import (
 	"os"
 	"path"
 
-	"github.com/samsonmxvi/go-wenku-downloader/scraper"
-	"github.com/samsonmxvi/go-wenku-downloader/util"
+	"github.com/gaesa/go-wenku-downloader/scraper"
+	"github.com/gaesa/go-wenku-downloader/util"
 )
 
 func DownloadNovelMetadata(novel *scraper.Novel, dirPath string) error {

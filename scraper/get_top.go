@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/samsonmxvi/go-wenku-downloader/scraper/enums"
+	"github.com/gaesa/go-wenku-downloader/scraper/enums"
 )
 
 func GetTop(topSoftType enums.TopSortType, page string) (*PageResult, error) {

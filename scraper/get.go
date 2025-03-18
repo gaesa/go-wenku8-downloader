@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/samsonmxvi/go-wenku-downloader/util"
+	"github.com/gaesa/go-wenku-downloader/util"
 )
 
 func Get(url string) (*goquery.Document, error) {

@@ -2,7 +2,7 @@ package prompt
 
 import (
 	"github.com/fatih/color"
-	"github.com/samsonmxvi/go-wenku-downloader/scraper"
+	"github.com/gaesa/go-wenku-downloader/scraper"
 )
 
 func promptNovelDetails(novelId int) (*scraper.Novel, error) {

@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/samsonmxvi/go-wenku-downloader/util"
+	"github.com/gaesa/go-wenku-downloader/util"
 )
 
 func DownloadImage(url string, dirPath string) error {
