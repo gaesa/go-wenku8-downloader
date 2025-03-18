@@ -112,5 +112,5 @@ func getChaterContent(chapter *scraper.Chapter) error {
 
 func getChapterContentFromFile(path string, chapter *scraper.Chapter) {
 	file, _ := os.ReadFile(path)
-	_ = json.Unmarshal([]byte(file), chapter)
+	_ = json.Unmarshal(file, chapter)
 }
