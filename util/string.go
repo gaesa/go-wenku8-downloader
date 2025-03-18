@@ -13,7 +13,6 @@ import (
 )
 
 func ConvertToString(src string, srcCode string, tagCode string) string {
-
 	srcCoder := mahonia.NewDecoder(srcCode)
 
 	srcResult := srcCoder.ConvertString(src)
@@ -25,7 +24,6 @@ func ConvertToString(src string, srcCode string, tagCode string) string {
 	result := string(cdata)
 
 	return result
-
 }
 
 func ConvertToUtf8(str string) string {
