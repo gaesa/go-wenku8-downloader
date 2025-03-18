@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-	f, err := os.OpenFile(path.Join(downloader.Root, "scraper.log"), os.O_CREATE|os.O_APPEND|os.O_RDWR, os.ModePerm)
+	f, err := os.OpenFile(path.Join(downloader.Root, "scraper.log"), os.O_CREATE|os.O_APPEND|os.O_RDWR, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
