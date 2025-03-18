@@ -88,6 +88,17 @@ func createEpub(novel *scraper.Novel, volumeName string, chapterCount int, cover
 	var imagePathList []string
 	// output epub path
 	epubFilePath := path.Join(xdg.UserDirs.Download, fmt.Sprintf("%s %s.epub", formatedNovelName, formatedVolumeName))
+
+	if util.CheckFileExist(epubFilePath) {
+		fmt.Println()
+		fmt.Printf("文件 %s 已经存在。是否覆盖？(y/N)：", epubFilePath)
+		var response string
+		fmt.Scanln(&response)
+		if strings.ToLower(response) != "y" {
+			return nil
+		}
+	}
+
 	// volume path
 	volumePath := path.Join(downloadPath, formatedVolumeName)
 	imagePath := path.Join(volumePath, downloader.ImageFolderName)
