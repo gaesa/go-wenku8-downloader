@@ -1,8 +1,14 @@
 package downloader
 
-import "time"
+import (
+	"os"
+	"path"
+	"time"
+)
 
-var (
+var Root = path.Join(os.TempDir(), "wenku8-download")
+
+const (
 	ErrorJsonName   = "error.json"
 	ImageFolderName = "images"
 	DownloadTimer   = time.Second

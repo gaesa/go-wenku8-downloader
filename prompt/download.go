@@ -11,14 +11,15 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/go-shiori/go-epub"
+	"github.com/adrg/xdg"
 	"github.com/gaesa/go-wenku-downloader/downloader"
 	"github.com/gaesa/go-wenku-downloader/scraper"
 	"github.com/gaesa/go-wenku-downloader/util"
+	"github.com/go-shiori/go-epub"
 )
 
 func download(novelId int) error {
-	downloadPath := "download/" + strconv.Itoa(novelId)
+	downloadPath := path.Join(downloader.Root, strconv.Itoa(novelId))
 	if err := util.CheckDir(downloadPath); err != nil {
 		return fmt.Errorf("创建目录失败: %e", err)
 	}
@@ -86,7 +87,7 @@ func createEpub(novel *scraper.Novel, volumeName string, chapterCount int, cover
 	formatedNovelName := formatFilename(novel.NovelName + "231231")
 	var imagePathList []string
 	// output epub path
-	epubFilePath := path.Join(downloadPath, fmt.Sprintf("%s %s.epub", formatedNovelName, formatedVolumeName))
+	epubFilePath := path.Join(xdg.UserDirs.Download, fmt.Sprintf("%s %s.epub", formatedNovelName, formatedVolumeName))
 	// volume path
 	volumePath := path.Join(downloadPath, formatedVolumeName)
 	imagePath := path.Join(volumePath, downloader.ImageFolderName)
