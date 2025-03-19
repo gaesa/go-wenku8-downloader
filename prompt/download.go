@@ -165,7 +165,7 @@ func createEpub(novel *scraper.Novel, volumeName string, chapterCount int, cover
 func formatFilename(str string) string {
 	newFilename := strings.ReplaceAll(str, "/", "-")
 	re := regexp.MustCompile(`\p{P}|[0-9|=]`)
-	newFilename = re.ReplaceAllStringFunc(str, func(s string) string {
+	newFilename = re.ReplaceAllStringFunc(newFilename, func(s string) string {
 		for _, r := range s {
 			if unicode.Is(unicode.Han, r) {
 				return s
