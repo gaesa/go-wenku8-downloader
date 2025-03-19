@@ -81,34 +81,41 @@ func DownloadVolume(volume *scraper.Volume, dirPath string, onlyWenku8Img bool) 
 }
 
 func getChapterArray(volume *scraper.Volume) ([]*scraper.Chapter, error) {
-	for i := range [RetryTimes]int{} {
+	retries := 0
+	for {
 		chaterArray, err := scraper.GetChapterArray(volume)
 		if err == nil {
 			time.Sleep(DownloadTimer)
 			return chaterArray, nil
 		} else {
-			log.Printf("获取章节列表失败 %v, 重试第%v次 \n", err, i)
-			time.Sleep(RetryTimer) // temp fix rate limit
-			continue
+			retries += 1
+			if retries > RetryTimes {
+				return nil, fmt.Errorf("获取章节列表失败")
+			} else {
+				log.Printf("获取章节列表失败 %v, 重试第%v次 \n", err, retries)
+				time.Sleep(RetryTimer) // temp fix rate limit
+			}
 		}
 	}
-	return nil, fmt.Errorf("获取章节列表失败")
 }
 
 func getChaterContent(chapter *scraper.Chapter) error {
-	var err error
-	for i := range [RetryTimes]int{} {
-		err = scraper.GetChapterContent(chapter)
+	retries := 0
+	for {
+		err := scraper.GetChapterContent(chapter)
 		if err == nil {
 			time.Sleep(DownloadTimer)
 			return nil
 		} else {
-			time.Sleep(RetryTimer) // temp fix rate limit
-			log.Printf("获取章节内容失败 %v, 重试第%v次 \n", err, i)
-			continue
+			retries += 1
+			if retries > RetryTimes {
+				return err
+			} else {
+				log.Printf("获取章节内容失败 %v, 重试第%v次 \n", err, retries)
+				time.Sleep(RetryTimer) // temp fix rate limit
+			}
 		}
 	}
-	return err
 }
 
 func getChapterContentFromFile(path string, chapter *scraper.Chapter) {
