@@ -1,4 +1,4 @@
-module github.com/gaesa/go-wenku-downloader
+module github.com/gaesa/go-wenku8-downloader
 
 go 1.23.0
 

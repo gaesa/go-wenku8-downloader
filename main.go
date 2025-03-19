@@ -9,9 +9,9 @@ import (
 
 	"github.com/corpix/uarand"
 	"github.com/fatih/color"
-	"github.com/gaesa/go-wenku-downloader/downloader"
-	"github.com/gaesa/go-wenku-downloader/prompt"
-	"github.com/gaesa/go-wenku-downloader/scraper"
+	"github.com/gaesa/go-wenku8-downloader/downloader"
+	"github.com/gaesa/go-wenku8-downloader/prompt"
+	"github.com/gaesa/go-wenku8-downloader/scraper"
 	"github.com/urfave/cli"
 )
 
@@ -41,7 +41,7 @@ func main() {
 		Usage:   "在终端实现轻小说的下载",
 		Version: "v1.0",
 		Action: func(c *cli.Context) error {
-			fmt.Println("欢迎使用轻小说文库下载器，本工具源码链接如下：https://github.com/gaesa/go-wenku-downloader")
+			fmt.Println("欢迎使用轻小说文库下载器，本工具源码链接如下：https://github.com/gaesa/go-wenku8-downloader")
 			prompt.InitPrompt()
 			return nil
 		},

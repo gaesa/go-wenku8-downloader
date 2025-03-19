@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/gaesa/go-wenku-downloader/scraper/enums"
+	"github.com/gaesa/go-wenku8-downloader/scraper/enums"
 	"github.com/stretchr/testify/require"
 )
 

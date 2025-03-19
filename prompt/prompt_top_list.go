@@ -6,8 +6,8 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/fatih/color"
-	"github.com/gaesa/go-wenku-downloader/scraper"
-	"github.com/gaesa/go-wenku-downloader/scraper/enums"
+	"github.com/gaesa/go-wenku8-downloader/scraper"
+	"github.com/gaesa/go-wenku8-downloader/scraper/enums"
 )
 
 func promptTopList(searchType enums.TopSortType) error {

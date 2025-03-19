@@ -2,7 +2,7 @@ package prompt
 
 import (
 	"github.com/AlecAivazis/survey/v2"
-	"github.com/gaesa/go-wenku-downloader/scraper"
+	"github.com/gaesa/go-wenku8-downloader/scraper"
 )
 
 func promptVolumeSelect(catalogueUrl string) ([]*scraper.Volume, error) {

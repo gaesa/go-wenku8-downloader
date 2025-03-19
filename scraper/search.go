@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/gaesa/go-wenku-downloader/scraper/enums"
-	"github.com/gaesa/go-wenku-downloader/util"
+	"github.com/gaesa/go-wenku8-downloader/scraper/enums"
+	"github.com/gaesa/go-wenku8-downloader/util"
 )
 
 func Search(str string, searchType enums.SearchType, page string) (*PageResult, error) {

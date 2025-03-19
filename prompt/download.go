@@ -11,9 +11,9 @@ import (
 	"strconv"
 
 	"github.com/adrg/xdg"
-	"github.com/gaesa/go-wenku-downloader/downloader"
-	"github.com/gaesa/go-wenku-downloader/scraper"
-	"github.com/gaesa/go-wenku-downloader/util"
+	"github.com/gaesa/go-wenku8-downloader/downloader"
+	"github.com/gaesa/go-wenku8-downloader/scraper"
+	"github.com/gaesa/go-wenku8-downloader/util"
 	"github.com/go-shiori/go-epub"
 )
 

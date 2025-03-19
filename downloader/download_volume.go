@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gaesa/go-wenku-downloader/scraper"
-	"github.com/gaesa/go-wenku-downloader/util"
+	"github.com/gaesa/go-wenku8-downloader/scraper"
+	"github.com/gaesa/go-wenku8-downloader/util"
 	"gopkg.in/cheggaaa/pb.v2"
 )
 
