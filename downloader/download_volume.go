@@ -92,7 +92,7 @@ func getChapterArray(volume *scraper.Volume) ([]*scraper.Chapter, error) {
 			if retries > RetryTimes {
 				return nil, fmt.Errorf("获取章节列表失败")
 			} else {
-				log.Printf("获取章节列表失败 %v, 重试第%v次 \n", err, retries)
+				log.Printf("获取章节列表失败 %v, 重试 [%v/%v]\n", err, retries, RetryTimes)
 				time.Sleep(RetryTimer) // temp fix rate limit
 			}
 		}
