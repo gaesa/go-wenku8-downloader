@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"regexp"
 	"strconv"
+	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/fatih/color"
@@ -121,7 +122,8 @@ func getSelectedIndex(label string, itmes []string) (int, error) {
 
 func getInputBool(label string, defaultValue bool) (bool, error) {
 	validate := func(input string) error {
-		if input == "y" || input == "n" || input == "" {
+		lowered := strings.ToLower(input)
+		if lowered == "y" || lowered == "n" || lowered == "" {
 			return nil
 		} else {
 			return fmt.Errorf("只能填写y, n")
