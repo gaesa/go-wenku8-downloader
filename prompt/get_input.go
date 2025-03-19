@@ -79,7 +79,7 @@ func inputCoverIndex() (int, error) {
 	}
 
 	prompt := promptui.Prompt{
-		Label:    "输入第几张插图作为封面(默认:0, 使用小说封面)",
+		Label:    "输入第几张插图作为封面(默认：0，使用小说封面)",
 		Validate: validate,
 		Stdout:   &noBellStdout{},
 	}
