@@ -34,10 +34,6 @@ func inputNovelId() (int, error) {
 			return errors.New("invalid number or url")
 		}
 
-		if err != nil {
-			return errors.New("invalid number or url")
-		}
-
 		novelId = mNovelId
 		return nil
 	}
