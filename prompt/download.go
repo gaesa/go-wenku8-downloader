@@ -9,7 +9,6 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
-	"unicode"
 
 	"github.com/adrg/xdg"
 	"github.com/gaesa/go-wenku-downloader/downloader"
@@ -165,13 +164,6 @@ func createEpub(novel *scraper.Novel, volumeName string, chapterCount int, cover
 func formatFilename(str string) string {
 	newFilename := strings.ReplaceAll(str, "/", "-")
 	re := regexp.MustCompile(`\p{P}|[0-9|=]`)
-	newFilename = re.ReplaceAllStringFunc(newFilename, func(s string) string {
-		for _, r := range s {
-			if unicode.Is(unicode.Han, r) {
-				return s
-			}
-		}
-		return ""
-	})
+	newFilename = re.ReplaceAllString(newFilename, "")
 	return newFilename
 }
