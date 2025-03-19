@@ -134,12 +134,11 @@ func createEpub(novel *scraper.Novel, volumeName string, chapterCount int, cover
 		if len(chapter.Content.Images) != 0 {
 			for _, img := range chapter.Content.Images {
 				imgFile := path.Join(imagePath, util.GetUrlLastString(img))
-				if !util.CheckFileExist(imgFile) {
-					continue
+				if util.CheckFileExist(imgFile) {
+					internalPath, _ := util.AddImage(epub, imgFile)
+					xhtml = util.AddImageToXhtml(internalPath, xhtml)
+					imagePathList = append(imagePathList, imgFile)
 				}
-				internalPath, _ := util.AddImage(epub, imgFile)
-				xhtml = util.AddImageToXhtml(internalPath, xhtml)
-				imagePathList = append(imagePathList, imgFile)
 			}
 		}
 		err = util.AddSectionXhtml(epub, chapter.Title, xhtml)
