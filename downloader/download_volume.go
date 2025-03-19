@@ -33,7 +33,7 @@ func DownloadVolume(volume *scraper.Volume, dirPath string, onlyWenku8Img bool) 
 		// check file exist
 		chapterFile := path.Join(dirPath, fmt.Sprintf("%d.json", chapter.Index))
 		if util.CheckFileExist(chapterFile) {
-			log.Printf("章节 %d 已存在，跳过下载。\n", chapter.Index)
+			fmt.Printf("章节 %d 已存在，跳过下载。\n", chapter.Index)
 			getChapterContentFromFile(chapterFile, chapter)
 		} else {
 			err := getChaterContent(chapter)

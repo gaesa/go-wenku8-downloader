@@ -2,7 +2,6 @@ package downloader
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"path"
 
@@ -22,7 +21,7 @@ func DownloadImage(url string, dirPath string) error {
 		// 获取文件大小
 		fileSize := fileInfo.Size()
 		if fileSize > 0 {
-			log.Printf("图片 %s 已存在，跳过下载。\n", imgName)
+			fmt.Printf("图片 %s 已存在，跳过下载。\n", imgName)
 			return nil
 		}
 	}
