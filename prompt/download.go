@@ -58,7 +58,7 @@ func download(novelId int) error {
 	}
 
 	// get onlyWenku8Img
-	onlyWenku8Img, err := getInputBool("是否只下载 wenku8 的图片（推荐使用默认数值, 非文库图片资源大多数情况已失效）[Y/n]", true)
+	onlyWenku8Img, err := getInputBool("是否只下载 wenku8.net 的图片（非文库图片资源可能已失效）[y/N]", false)
 	if err != nil {
 		return fmt.Errorf("prompt failed %v", err)
 	}

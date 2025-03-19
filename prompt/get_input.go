@@ -60,7 +60,7 @@ func inputNovelId() (int, error) {
 }
 
 func inputCoverIndex() (int, error) {
-	var coverIndex int
+	coverIndex := 1
 	// validate input type number
 	validate := func(input string) error {
 		if input == "" {
@@ -75,7 +75,7 @@ func inputCoverIndex() (int, error) {
 	}
 
 	prompt := promptui.Prompt{
-		Label:    "输入第几张插图作为封面(默认：0，使用小说封面)",
+		Label:    "请输入用作封面的图片编号（默认：1，通常为单行本封面；0 为小说封面；编号范围：0 至插图数量）",
 		Validate: validate,
 		Stdout:   &noBellStdout{},
 	}
