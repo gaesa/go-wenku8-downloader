@@ -15,12 +15,15 @@ func CheckFileExist(filePath string) bool {
 
 func CheckDir(dirPath string) error {
 	_, err := os.Stat(dirPath)
-	if os.IsNotExist(err) {
-		// create folder
-		err := os.MkdirAll(dirPath, os.ModePerm)
-		if err != nil {
+	if err != nil {
+		if os.IsNotExist(err) {
+			// create folder
+			err := os.MkdirAll(dirPath, 0700)
 			return fmt.Errorf("创建目录失败: %v", err)
+		} else {
+			return err
 		}
+	} else {
+		return nil
 	}
-	return nil
 }
