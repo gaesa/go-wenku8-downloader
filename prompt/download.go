@@ -34,7 +34,7 @@ func download(novelId int) error {
 
 	// download cover image
 	success := false
-	for i := 0; i < 3; i++ {
+	for range [3]int{} {
 		err = downloader.DownloadImage(novel.Cover, downloadPath)
 		if err == nil {
 			success = true

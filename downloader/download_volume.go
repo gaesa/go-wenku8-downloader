@@ -62,7 +62,7 @@ func DownloadVolume(volume *scraper.Volume, dirPath string, onlyWenku8Img bool) 
 			continue
 		}
 		success := false
-		for i := 0; i < RetryTimes; i++ {
+		for range [RetryTimes]int{} {
 			err := DownloadImage(imageURL, imageDirPath)
 			if err == nil {
 				success = true
@@ -81,7 +81,7 @@ func DownloadVolume(volume *scraper.Volume, dirPath string, onlyWenku8Img bool) 
 }
 
 func getChapterArray(volume *scraper.Volume) ([]*scraper.Chapter, error) {
-	for i := 0; i < RetryTimes; i++ {
+	for i := range [RetryTimes]int{} {
 		chaterArray, err := scraper.GetChapterArray(volume)
 		if err == nil {
 			time.Sleep(DownloadTimer)
@@ -97,7 +97,7 @@ func getChapterArray(volume *scraper.Volume) ([]*scraper.Chapter, error) {
 
 func getChaterContent(chapter *scraper.Chapter) error {
 	var err error
-	for i := 0; i < RetryTimes; i++ {
+	for i := range [RetryTimes]int{} {
 		err = scraper.GetChapterContent(chapter)
 		if err == nil {
 			time.Sleep(DownloadTimer)
