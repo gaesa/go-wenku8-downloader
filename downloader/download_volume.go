@@ -58,22 +58,20 @@ func DownloadVolume(volume *scraper.Volume, dirPath string, onlyWenku8Img bool) 
 
 	for _, imageURL := range imageArray {
 		isWenku8Source := strings.Contains(imageURL, "wenku8.com")
-		if !isWenku8Source && onlyWenku8Img {
-			continue
-		}
-		success := false
-		for range [RetryTimes]int{} {
-			err := DownloadImage(imageURL, imageDirPath)
-			if err == nil {
-				success = true
-				break
-			} else {
-				time.Sleep(RetryTimer) // temp fix rate limit
-				continue
+		if isWenku8Source || !onlyWenku8Img {
+			success := false
+			for range [RetryTimes]int{} {
+				err := DownloadImage(imageURL, imageDirPath)
+				if err == nil {
+					success = true
+					break
+				} else {
+					time.Sleep(RetryTimer) // temp fix rate limit
+				}
 			}
-		}
-		if !success {
-			return fmt.Errorf("图片下载错误")
+			if !success {
+				return fmt.Errorf("图片下载错误")
+			}
 		}
 	}
 
