@@ -83,7 +83,7 @@ func download(novelId int) error {
 
 func createEpub(novel *scraper.Novel, volumeName string, chapterCount int, coverIndex int, downloadPath string) error {
 	formatedVolumeName := formatFilename(volumeName)
-	formatedNovelName := formatFilename(novel.NovelName + "231231")
+	formatedNovelName := formatFilename(novel.NovelName)
 	var imagePathList []string
 	// output epub path
 	epubFilePath := path.Join(xdg.UserDirs.Download, fmt.Sprintf("%s %s.epub", formatedNovelName, formatedVolumeName))
@@ -163,7 +163,7 @@ func createEpub(novel *scraper.Novel, volumeName string, chapterCount int, cover
 
 func formatFilename(str string) string {
 	newFilename := strings.ReplaceAll(str, "/", "-")
-	re := regexp.MustCompile(`\p{P}|[0-9|=]`)
+	re := regexp.MustCompile(`\p{P}|[|=]`)
 	newFilename = re.ReplaceAllString(newFilename, "")
 	return newFilename
 }
