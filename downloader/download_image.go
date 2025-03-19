@@ -9,6 +9,11 @@ import (
 )
 
 func DownloadImage(url string, dirPath string) error {
+	// check dir if not exit create
+	if err := util.CheckDir(dirPath); err != nil {
+		return fmt.Errorf("创建路径失败：%v", err)
+	}
+
 	// image name
 	imgName := util.GetUrlLastString(url)
 	// image file path
@@ -24,11 +29,6 @@ func DownloadImage(url string, dirPath string) error {
 			fmt.Printf("图片 %s 已存在，跳过下载。\n", imgName)
 			return nil
 		}
-	}
-
-	// check dir if not exit create
-	if err := util.CheckDir(dirPath); err != nil {
-		return fmt.Errorf("创建路径失败：%v", err)
 	}
 
 	return Grab(filePath, url)
