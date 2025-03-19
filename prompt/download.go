@@ -7,8 +7,8 @@ import (
 	"os"
 	"path"
 	"regexp"
+	"runtime"
 	"strconv"
-	"strings"
 
 	"github.com/adrg/xdg"
 	"github.com/gaesa/go-wenku-downloader/downloader"
@@ -162,8 +162,12 @@ func createEpub(novel *scraper.Novel, volumeName string, chapterCount int, cover
 }
 
 func formatFilename(str string) string {
-	newFilename := strings.ReplaceAll(str, "/", "-")
-	re := regexp.MustCompile(`\p{P}|[|=]`)
-	newFilename = re.ReplaceAllString(newFilename, "")
-	return newFilename
+	var re *regexp.Regexp
+	switch runtime.GOOS {
+	case "windows":
+		re = regexp.MustCompile(`[<>:"/\\|?*\x00-\x1F\x7F]`)
+	default:
+		re = regexp.MustCompile(`[/\x00-\x1F\x7F]`)
+	}
+	return re.ReplaceAllString(str, "�")
 }
