@@ -89,11 +89,11 @@ func createEpub(novel *scraper.Novel, volumeName string, chapterCount int, cover
 	epubFilePath := path.Join(xdg.UserDirs.Download, fmt.Sprintf("%s %s.epub", formatedNovelName, formatedVolumeName))
 
 	if util.CheckFileExist(epubFilePath) {
-		fmt.Println()
-		fmt.Printf("文件 %s 已经存在。是否覆盖？(y/N)：", epubFilePath)
-		var response string
-		fmt.Scanln(&response)
-		if strings.ToLower(response) != "y" {
+		overwrite, err := getInputBool(fmt.Sprintf("文件 %s 已经存在。是否覆盖？(y/N)", epubFilePath), false)
+		if err != nil {
+			return fmt.Errorf("prompt failed %v", err)
+		}
+		if !overwrite {
 			return nil
 		}
 	}
