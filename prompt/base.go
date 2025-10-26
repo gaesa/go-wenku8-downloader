@@ -1,10 +1,12 @@
 package prompt
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"os"
 
+	"github.com/AlecAivazis/survey/v2/terminal"
 	"github.com/gaesa/go-wenku8-downloader/scraper/enums"
 )
 
@@ -26,8 +28,15 @@ var QuestionsText = []string{
 
 func InitPrompt() {
 	for {
-		selectedIndex, _ := getSelectedIndex("你打算做什么", QuestionsText)
-		questionTwo(Questions(selectedIndex))
+		selectedIndex, err := getSelectedIndex("你打算做什么", QuestionsText)
+		if err != nil {
+			if !errors.Is(err, terminal.InterruptErr) {
+				log.Print(err)
+			}
+			break
+		} else {
+			questionTwo(Questions(selectedIndex))
+		}
 	}
 }
 
