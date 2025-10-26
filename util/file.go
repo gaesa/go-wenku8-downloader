@@ -19,7 +19,11 @@ func CheckDir(dirPath string) error {
 		if os.IsNotExist(err) {
 			// create folder
 			err := os.MkdirAll(dirPath, 0700)
-			return fmt.Errorf("创建目录失败: %v", err)
+			if err != nil {
+				return fmt.Errorf("创建目录失败: %v", err)
+			} else {
+				return nil
+			}
 		} else {
 			return err
 		}
