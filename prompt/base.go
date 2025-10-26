@@ -30,6 +30,7 @@ func InitPrompt() {
 		questionTwo(Questions(selectedIndex))
 	}
 }
+
 func questionTwo(question Questions) {
 	switch question {
 	case ViewPopularNovels:
