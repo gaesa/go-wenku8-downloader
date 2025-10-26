@@ -41,43 +41,38 @@ func InitPrompt() {
 }
 
 func questionTwo(question Questions) {
+	handleError := func(err error, s string) {
+		if err != nil {
+			if !errors.Is(err, terminal.InterruptErr) {
+				log.Printf("%v failed %v\n", s, err)
+				return
+			} else {
+				os.Exit(0)
+			}
+		}
+	}
+
 	switch question {
 	case ViewPopularNovels:
 		selectedIndex, err := getSelectedIndex("请选择分类", enums.TopSoftText)
-		if err != nil {
-			log.Printf("Search failed %v\n", err)
-			return
-		}
+		handleError(err, "Search")
 		promptTopList(enums.TopSortType(selectedIndex))
 
 	case SearchNovels:
 		selectedIndex, err := getSelectedIndex("请选择搜索类型", enums.SearchTypeText)
-		if err != nil {
-			log.Printf("Search failed %v\n", err)
-			return
-		}
+		handleError(err, "Search")
+
 		str, err := getInputString(fmt.Sprintf("请输入要搜索的%s", enums.SearchTypeText[selectedIndex]))
-		if err != nil {
-			log.Printf("Search failed %v\n", err)
-			return
-		}
+		handleError(err, "Search")
+
 		err = searchNovels(str, enums.SearchType(selectedIndex))
-		if err != nil {
-			log.Printf("Search failed %v\n", err)
-			return
-		}
+		handleError(err, "Search")
 
 	case DownloadNovel:
 		novelId, err := inputNovelId()
-		if err != nil {
-			log.Printf("Prompt failed %v\n", err)
-			return
-		}
+		handleError(err, "Prompt")
 		err = download(novelId)
-		if err != nil {
-			log.Printf("download failed %v\n", err)
-			return
-		}
+		handleError(err, "Download")
 
 	case DoNothing:
 		os.Exit(0)
